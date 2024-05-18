@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище educational_practiceModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID_client" />
+          </Key>
+          <Property Name="ID_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="char" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Climate">
+          <Key>
+            <PropertyRef Name="ID_climate" />
+          </Key>
+          <Property Name="ID_climate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID_country" />
+          </Key>
+          <Property Name="ID_country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CountryClimate">
+          <Key>
+            <PropertyRef Name="ID_countryclimate" />
+          </Key>
+          <Property Name="ID_countryclimate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_country" Type="int" Nullable="false" />
+          <Property Name="ID_climate" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="ID_hotel" />
+          </Key>
+          <Property Name="ID_hotel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_country" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Category" Type="int" Nullable="false" />
+          <Property Name="While_living" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID_role" />
+          </Key>
+          <Property Name="ID_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="ID_trip" />
+          </Key>
+          <Property Name="ID_trip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_client" Type="int" Nullable="false" />
+          <Property Name="ID_country" Type="int" Nullable="false" />
+          <Property Name="Trip_start" Type="date" Nullable="false" />
+          <Property Name="Trip_end" Type="date" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Discount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_user" />
+          </Key>
+          <Property Name="ID_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_role" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CountryClimate_Climate">
+          <End Role="Climate" Type="Self.Climate" Multiplicity="1" />
+          <End Role="CountryClimate" Type="Self.CountryClimate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Climate">
+              <PropertyRef Name="ID_climate" />
+            </Principal>
+            <Dependent Role="CountryClimate">
+              <PropertyRef Name="ID_climate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CountryClimate_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="CountryClimate" Type="Self.CountryClimate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_country" />
+            </Principal>
+            <Dependent Role="CountryClimate">
+              <PropertyRef Name="ID_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_country" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="ID_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_client" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="ID_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_country" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="ID_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID_role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище educational_practiceModelContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Climate" EntityType="Self.Climate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CountryClimate" EntityType="Self.CountryClimate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trip" EntityType="Self.Trip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CountryClimate_Climate" Association="Self.FK_CountryClimate_Climate">
+            <End Role="Climate" EntitySet="Climate" />
+            <End Role="CountryClimate" EntitySet="CountryClimate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CountryClimate_Country" Association="Self.FK_CountryClimate_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="CountryClimate" EntitySet="CountryClimate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Country" Association="Self.FK_Hotel_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip_Client" Association="Self.FK_Trip_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip_Country" Association="Self.FK_Trip_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="educational_practiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID_client" />
+          </Key>
+          <Property Name="ID_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK_Trip_Client" FromRole="Client" ToRole="Trip" />
+        </EntityType>
+        <EntityType Name="Climate">
+          <Key>
+            <PropertyRef Name="ID_climate" />
+          </Key>
+          <Property Name="ID_climate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CountryClimate" Relationship="Self.FK_CountryClimate_Climate" FromRole="Climate" ToRole="CountryClimate" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID_country" />
+          </Key>
+          <Property Name="ID_country" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CountryClimate" Relationship="Self.FK_CountryClimate_Country" FromRole="Country" ToRole="CountryClimate" />
+          <NavigationProperty Name="Hotel" Relationship="Self.FK_Hotel_Country" FromRole="Country" ToRole="Hotel" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK_Trip_Country" FromRole="Country" ToRole="Trip" />
+        </EntityType>
+        <EntityType Name="CountryClimate">
+          <Key>
+            <PropertyRef Name="ID_countryclimate" />
+          </Key>
+          <Property Name="ID_countryclimate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_country" Type="Int32" Nullable="false" />
+          <Property Name="ID_climate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Climate" Relationship="Self.FK_CountryClimate_Climate" FromRole="CountryClimate" ToRole="Climate" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_CountryClimate_Country" FromRole="CountryClimate" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="ID_hotel" />
+          </Key>
+          <Property Name="ID_hotel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_country" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="Int32" Nullable="false" />
+          <Property Name="While_living" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Hotel_Country" FromRole="Hotel" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID_role" />
+          </Key>
+          <Property Name="ID_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="ID_trip" />
+          </Key>
+          <Property Name="ID_trip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_client" Type="Int32" Nullable="false" />
+          <Property Name="ID_country" Type="Int32" Nullable="false" />
+          <Property Name="Trip_start" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Trip_end" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Discount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Trip_Client" FromRole="Trip" ToRole="Client" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Trip_Country" FromRole="Trip" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_user" />
+          </Key>
+          <Property Name="ID_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_role" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Trip_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_client" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="ID_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CountryClimate_Climate">
+          <End Role="Climate" Type="Self.Climate" Multiplicity="1" />
+          <End Role="CountryClimate" Type="Self.CountryClimate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Climate">
+              <PropertyRef Name="ID_climate" />
+            </Principal>
+            <Dependent Role="CountryClimate">
+              <PropertyRef Name="ID_climate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CountryClimate_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="CountryClimate" Type="Self.CountryClimate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_country" />
+            </Principal>
+            <Dependent Role="CountryClimate">
+              <PropertyRef Name="ID_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_country" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="ID_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID_country" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="ID_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID_role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="educational_practiceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Climate" EntityType="Self.Climate" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="CountryClimate" EntityType="Self.CountryClimate" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Trip" EntityType="Self.Trip" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Trip_Client" Association="Self.FK_Trip_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CountryClimate_Climate" Association="Self.FK_CountryClimate_Climate">
+            <End Role="Climate" EntitySet="Climate" />
+            <End Role="CountryClimate" EntitySet="CountryClimate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CountryClimate_Country" Association="Self.FK_CountryClimate_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="CountryClimate" EntitySet="CountryClimate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Country" Association="Self.FK_Hotel_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip_Country" Association="Self.FK_Trip_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище educational_practiceModelContainer" CdmEntityContainer="educational_practiceEntities">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="educational_practiceModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ID_client" ColumnName="ID_client" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Climate">
+            <EntityTypeMapping TypeName="educational_practiceModel.Climate">
+              <MappingFragment StoreEntitySet="Climate">
+                <ScalarProperty Name="ID_climate" ColumnName="ID_climate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="educational_practiceModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="ID_country" ColumnName="ID_country" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CountryClimate">
+            <EntityTypeMapping TypeName="educational_practiceModel.CountryClimate">
+              <MappingFragment StoreEntitySet="CountryClimate">
+                <ScalarProperty Name="ID_countryclimate" ColumnName="ID_countryclimate" />
+                <ScalarProperty Name="ID_country" ColumnName="ID_country" />
+                <ScalarProperty Name="ID_climate" ColumnName="ID_climate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotel">
+            <EntityTypeMapping TypeName="educational_practiceModel.Hotel">
+              <MappingFragment StoreEntitySet="Hotel">
+                <ScalarProperty Name="ID_hotel" ColumnName="ID_hotel" />
+                <ScalarProperty Name="ID_country" ColumnName="ID_country" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="While_living" ColumnName="While_living" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="educational_practiceModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ID_role" ColumnName="ID_role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="educational_practiceModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trip">
+            <EntityTypeMapping TypeName="educational_practiceModel.Trip">
+              <MappingFragment StoreEntitySet="Trip">
+                <ScalarProperty Name="ID_trip" ColumnName="ID_trip" />
+                <ScalarProperty Name="ID_client" ColumnName="ID_client" />
+                <ScalarProperty Name="ID_country" ColumnName="ID_country" />
+                <ScalarProperty Name="Trip_start" ColumnName="Trip_start" />
+                <ScalarProperty Name="Trip_end" ColumnName="Trip_end" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="educational_practiceModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID_user" ColumnName="ID_user" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ID_role" ColumnName="ID_role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
