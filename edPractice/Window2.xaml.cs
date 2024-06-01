@@ -1,4 +1,6 @@
-﻿using System;
+﻿using edPractice.ApplicationData;
+using edPractice.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,92 @@ namespace edPractice
         public Window2()
         {
             InitializeComponent();
+            tripsList.ItemsSource = AppConnect.model1db.Trip.ToList();
+            ComboFilter.Items.Add("от 0 до 550");
+            ComboFilter.Items.Add("от 1000 до 1500");
+            ComboFilter.Items.Add("от 2000");
+            ComboSort.Items.Add("по возрастанию");
+            ComboSort.Items.Add("по убыванию");
+
         }
+        private void Edit(object sender, MouseButtonEventArgs e)
+        {
+            var selectedItem = (Trip)((FrameworkElement)sender).DataContext;
+        }
+
+        Trip[] FindTrip()
+        {
+            var trip = AppConnect.model1db.Trip.ToList();
+            var tripall = trip;
+            var country = AppConnect.model1db.Country.ToList();
+
+            //поиск по названию страны
+            if (TextSearch != null)
+            {
+                country = country.Where(x => x.Name.ToLower().Contains(TextSearch.Text.ToLower())).ToList();
+            }
+
+            //фильтрация по скидки
+            if (ComboFilter.SelectedIndex >= 0)
+            {
+                switch (ComboFilter.SelectedIndex)
+                {
+                    case 0:
+                        trip=trip.Where(x => x.Discount > 0 && x.Discount < 550).ToList();
+                        break;
+                    case 1:
+                        trip=trip.Where(x => x.Discount >= 1000 && x.Discount < 1500).ToList();
+                        break;
+                    case 2:
+                        trip=trip.Where(x => x.Discount >= 2000).ToList();
+                        break;
+                }
+            }
+
+            //сортировка по возврастанию и убыванию цены
+            if (ComboSort.SelectedIndex >= 0)
+            {
+                switch (ComboSort.SelectedIndex)
+                {
+                    case 0:
+                        {
+                            trip=trip.OrderBy(x => x.Price).ToList();
+                            break;
+                        }
+                    case 1:
+                        {
+                            trip=trip.OrderByDescending(x => x.Price).ToList();
+                            break;
+                        }
+                }
+            }
+
+            //количество найденных элементов
+            if (trip.Count > 0)
+            {
+                LabelCount.Content = "Найдено " + trip.Count + " из " + tripall.Count;
+            }
+            else
+            {
+                LabelCount.Content = "Ничего не найдено ";
+            }
+            return trip.ToArray(); 
+        }
+
+        private void TextSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            tripsList.ItemsSource = FindTrip();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tripsList.ItemsSource = FindTrip();
+        }
+
+        private void ComboSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tripsList.ItemsSource = FindTrip();
+        }
+    
     }
 }

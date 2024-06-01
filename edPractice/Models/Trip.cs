@@ -18,10 +18,40 @@ namespace edPractice.Models
         public int ID_client { get; set; }
         public int ID_country { get; set; }
         public System.DateTime Trip_start { get; set; }
+        public string dates
+        {
+            get
+            {
+                return Trip_start.ToShortDateString() + " - ";
+            }
+
+        }
         public System.DateTime Trip_end { get; set; }
+        public string date
+        {
+            get
+            {
+                return Trip_end.ToShortDateString(); ;
+            }
+           
+        }
+
         public int Price { get; set; }
         public int Discount { get; set; }
-    
+        public string Image { get; set; }
+        public string CorrectImage
+        {
+            get
+            {
+                if (string.IsNullOrEmpty($"../../Images/{Image}"))
+                {
+                    return "../Images/default.png";
+                }
+                return $"../Images/{Image}";
+            }
+
+        }
+
         public virtual Client Client { get; set; }
         public virtual Country Country { get; set; }
     }

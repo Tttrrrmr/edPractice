@@ -9,6 +9,6 @@ namespace edPractice.ApplicationData
 {
     public class AppConnect
     {
-        public static educational_practiceEntities model1db;
+        public static educational_practiceEntities2 model1db;
     }
 }

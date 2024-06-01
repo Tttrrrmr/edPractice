@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0bb5bd95c55446f59fee7d66d1497097" Name="Diagram1">
+      <Diagram DiagramId="0641ba3842b14d70958be77516ad8fca" Name="Diagram1">
         <EntityTypeShape EntityType="educational_practiceModel.Client" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="educational_practiceModel.Climate" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="educational_practiceModel.Country" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="educational_practiceModel.CountryClimate" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="educational_practiceModel.Hotel" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="educational_practiceModel.Role" Width="1.5" PointX="5.75" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="educational_practiceModel.sysdiagrams" Width="1.5" PointX="6.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="educational_practiceModel.Trip" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="educational_practiceModel.User" Width="1.5" PointX="8" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="educational_practiceModel.Role" Width="1.5" PointX="5.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="educational_practiceModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="educational_practiceModel.Trip" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="educational_practiceModel.User" Width="1.5" PointX="8" PointY="2.25" IsExpanded="true" />
         <AssociationConnector Association="educational_practiceModel.FK_Trip_Client" ManuallyRouted="false" />
         <AssociationConnector Association="educational_practiceModel.FK_CountryClimate_Climate" ManuallyRouted="false" />
         <AssociationConnector Association="educational_practiceModel.FK_CountryClimate_Country" ManuallyRouted="false" />

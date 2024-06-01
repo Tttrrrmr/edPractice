@@ -13,10 +13,10 @@ namespace edPractice.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class educational_practiceEntities : DbContext
+    public partial class educational_practiceEntities2 : DbContext
     {
-        public educational_practiceEntities()
-            : base("name=educational_practiceEntities")
+        public educational_practiceEntities2()
+            : base("name=educational_practiceEntities2")
         {
         }
     
