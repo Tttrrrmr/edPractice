@@ -22,6 +22,7 @@ namespace edPractice.Models
         {
             get
             {
+                Console.WriteLine(Trip_start.ToShortDateString() + " - ");
                 return Trip_start.ToShortDateString() + " - ";
             }
 
@@ -31,9 +32,10 @@ namespace edPractice.Models
         {
             get
             {
-                return Trip_end.ToShortDateString(); ;
+                Console.WriteLine(Trip_end.ToShortDateString());
+                return Trip_end.ToShortDateString();
             }
-           
+
         }
 
         public int Price { get; set; }

@@ -1,0 +1,27 @@
+﻿<Window x:Class="edPractice.Window3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:edPractice"
+        mc:Ignorable="d"
+        Title="Добавление и редактирование формы" Height="479" Width="714">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Height="26" Margin="38,35,0,0" TextWrapping="Wrap" Text="Название страны" VerticalAlignment="Top" Width="153"/>
+        <ComboBox x:Name="ComboCountry"  HorizontalAlignment="Left" Height="26" Margin="227,35,0,0" VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="38,93,0,0" TextWrapping="Wrap" Text="Дата отправления" VerticalAlignment="Top" Width="153"/>
+        <DatePicker x:Name="StartDatePicker" Text="{Binding Path=Trip_start}"   HorizontalAlignment="Left" Height="23" Margin="227,93,0,0" VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="38,151,0,0" TextWrapping="Wrap" Text="Дата окончания" VerticalAlignment="Top" Width="153"/>
+        <DatePicker x:Name="EndDatePicker" Text="{Binding Path=Trip_end}"  HorizontalAlignment="Left" Height="24" Margin="227,151,0,0" VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="38,202,0,0" TextWrapping="Wrap" Text="Стоимость " VerticalAlignment="Top" Width="153"/>
+        <TextBox x:Name="TextPrice" Text="{Binding Path=Price}" HorizontalAlignment="Left" Height="24" Margin="227,203,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Height="26" Margin="38,254,0,0" TextWrapping="Wrap" Text="Скидка" VerticalAlignment="Top" Width="153"/>
+        <TextBox x:Name="TextDiscount" Text="{Binding Path=Discount}" HorizontalAlignment="Left" Height="26" Margin="227,254,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Height="24" Margin="38,307,0,0" TextWrapping="Wrap" Text="Клиент" VerticalAlignment="Top" Width="153"/>
+        <ComboBox x:Name="ComboClient" Text="{Binding Path=Client}"  HorizontalAlignment="Left" Height="24" Margin="227,307,0,0" VerticalAlignment="Top" Width="300"/>
+        <Button x:Name="BtnSave" Content="Сохранить" HorizontalAlignment="Center" Height="30" Margin="0,408,0,0" Click="Button_Click" VerticalAlignment="Top" Width="204"/>
+        <TextBlock HorizontalAlignment="Left" Height="20" Margin="38,357,0,0" TextWrapping="Wrap" Text="Картинка" VerticalAlignment="Top" Width="153"/>
+        <ComboBox x:Name="ComboImage" Text="{Binding Path=Image}"  HorizontalAlignment="Left" Height="24" Margin="227,354,0,0" VerticalAlignment="Top" Width="300"/>
+
+    </Grid>
+</Window>

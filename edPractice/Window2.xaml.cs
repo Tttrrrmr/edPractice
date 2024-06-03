@@ -30,6 +30,15 @@ namespace edPractice
             ComboFilter.Items.Add("от 2000");
             ComboSort.Items.Add("по возрастанию");
             ComboSort.Items.Add("по убыванию");
+            tripsList.SelectionChanged += new SelectionChangedEventHandler((s, e) =>
+            {
+                BtnEdit.IsEnabled = tripsList.SelectedItem != null;
+                BtnDelete.IsEnabled = tripsList.SelectedItem != null;
+            });
+            FocusableChanged += new DependencyPropertyChangedEventHandler((s, e) =>
+            {
+                tripsList.ItemsSource = AppConnect.model1db.Trip.ToList();
+            });
 
         }
         private void Edit(object sender, MouseButtonEventArgs e)
@@ -110,6 +119,27 @@ namespace edPractice
         {
             tripsList.ItemsSource = FindTrip();
         }
-    
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Window3 window = new Window3(new Trip());
+            window.Show();
+        }
+
+        private void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Window3 window = new Window3((Trip)tripsList.SelectedItem);
+            window.Show();
+
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            AppConnect.model1db.Trip.Remove((Trip)tripsList.SelectedItem);
+            AppConnect.model1db.SaveChanges();
+            tripsList.ItemsSource = AppConnect.model1db.Trip.ToList();
+        }
     }
+
 }
+
