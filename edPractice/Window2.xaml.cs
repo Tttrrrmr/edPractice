@@ -3,6 +3,7 @@ using edPractice.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace edPractice
     /// </summary>
     public partial class Window2 : Window
     {
-        public Window2()
+        public Window2(int role)
         {
             InitializeComponent();
             tripsList.ItemsSource = AppConnect.model1db.Trip.ToList();
@@ -32,13 +33,21 @@ namespace edPractice
             ComboSort.Items.Add("по убыванию");
             tripsList.SelectionChanged += new SelectionChangedEventHandler((s, e) =>
             {
-                BtnEdit.IsEnabled = tripsList.SelectedItem != null;
-                BtnDelete.IsEnabled = tripsList.SelectedItem != null;
+                BtnEdit.IsEnabled = tripsList.SelectedItem != null && role != 1;
+                BtnDelete.IsEnabled = tripsList.SelectedItem != null && role != 1;
             });
             FocusableChanged += new DependencyPropertyChangedEventHandler((s, e) =>
             {
                 tripsList.ItemsSource = AppConnect.model1db.Trip.ToList();
             });
+
+            if (role == 1)
+            {
+                BtnAdd.IsEnabled = false; 
+                BtnDelete.IsEnabled = false; 
+                BtnEdit.IsEnabled = false;
+            }
+            
 
         }
         private void Edit(object sender, MouseButtonEventArgs e)

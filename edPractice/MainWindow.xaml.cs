@@ -30,24 +30,25 @@ namespace edPractice
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            User user = new User();
             try
             {
-                var user0bj = AppConnect.model1db.User.FirstOrDefault(x => x.Login == txbLogin.Text && x.Password == psbPassword.Password);
-                if (user0bj == null)
+                user = AppConnect.model1db.User.FirstOrDefault(x => x.Login == txbLogin.Text && x.Password == psbPassword.Password);
+                if (user == null)
                 {
                     MessageBox.Show("Такого пользователя нет!", "Ошибка при авторизации!",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    switch (user0bj.ID_role)
+                    switch (user.ID_role)
                     {
                         case 1:
-                            MessageBox.Show("Здравствуйте, пользователь " + user0bj.Name + "!",
+                            MessageBox.Show("Здравствуйте, пользователь " + user.Name + "!",
                                 "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                             break;
                         case 2:
-                            MessageBox.Show("Здравствуйте, администратор " + user0bj.Name + "!",
+                            MessageBox.Show("Здравствуйте, администратор " + user.Name + "!",
                                "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                             break;
                         default:
@@ -61,7 +62,7 @@ namespace edPractice
                 MessageBox.Show("Ошибка " + Ex.Message.ToString() + "Критическая работа приложения!",
                     "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            Window2 window = new Window2();
+            Window2 window = new Window2(user.ID_role);
             window.Show();
             this.Close();
 
