@@ -13,10 +13,10 @@ namespace edPractice.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class educational_practiceEntities2 : DbContext
+    public partial class educational_practiceEntities : DbContext
     {
-        public educational_practiceEntities2()
-            : base("name=educational_practiceEntities2")
+        public educational_practiceEntities()
+            : base("name=educational_practiceEntities")
         {
         }
     
@@ -30,6 +30,7 @@ namespace edPractice.Models
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<CountryClimate> CountryClimate { get; set; }
         public virtual DbSet<Hotel> Hotel { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Trip> Trip { get; set; }

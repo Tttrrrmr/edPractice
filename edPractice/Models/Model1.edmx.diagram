@@ -4,21 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0641ba3842b14d70958be77516ad8fca" Name="Diagram1">
+      <Diagram DiagramId="c0c8e6502149442cb156e9188bdba6e6" Name="Diagram1">
         <EntityTypeShape EntityType="educational_practiceModel.Client" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="educational_practiceModel.Climate" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="educational_practiceModel.Country" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="educational_practiceModel.CountryClimate" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="educational_practiceModel.Climate" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="educational_practiceModel.Country" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="educational_practiceModel.CountryClimate" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="educational_practiceModel.Hotel" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="educational_practiceModel.Order" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="educational_practiceModel.Role" Width="1.5" PointX="5.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="educational_practiceModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="educational_practiceModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="educational_practiceModel.Trip" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="educational_practiceModel.User" Width="1.5" PointX="8" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="educational_practiceModel.FK_Order_Client" ManuallyRouted="false" />
         <AssociationConnector Association="educational_practiceModel.FK_Trip_Client" ManuallyRouted="false" />
         <AssociationConnector Association="educational_practiceModel.FK_CountryClimate_Climate" ManuallyRouted="false" />
         <AssociationConnector Association="educational_practiceModel.FK_CountryClimate_Country" ManuallyRouted="false" />
         <AssociationConnector Association="educational_practiceModel.FK_Hotel_Country" ManuallyRouted="false" />
         <AssociationConnector Association="educational_practiceModel.FK_Trip_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="educational_practiceModel.FK_Order_Trip" ManuallyRouted="false" />
         <AssociationConnector Association="educational_practiceModel.FK_User_Role" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

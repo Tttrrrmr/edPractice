@@ -50,6 +50,17 @@
           <Property Name="Category" Type="int" Nullable="false" />
           <Property Name="While_living" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID_order" />
+          </Key>
+          <Property Name="ID_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="ID_client" Type="int" Nullable="false" />
+          <Property Name="Order_date" Type="date" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="ID_trip" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ID_role" />
@@ -126,6 +137,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_client" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ID_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Trip">
+          <End Role="Trip" Type="Self.Trip" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trip">
+              <PropertyRef Name="ID_trip" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ID_trip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Trip_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
@@ -168,6 +203,7 @@
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CountryClimate" EntityType="Self.CountryClimate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trip" EntityType="Self.Trip" Schema="dbo" store:Type="Tables" />
@@ -183,6 +219,14 @@
           <AssociationSet Name="FK_Hotel_Country" Association="Self.FK_Hotel_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Trip" Association="Self.FK_Order_Trip">
+            <End Role="Trip" EntitySet="Trip" />
+            <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK_Trip_Client" Association="Self.FK_Trip_Client">
             <End Role="Client" EntitySet="Client" />
@@ -213,6 +257,7 @@
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Client" FromRole="Client" ToRole="Order" />
           <NavigationProperty Name="Trip" Relationship="Self.FK_Trip_Client" FromRole="Client" ToRole="Trip" />
         </EntityType>
         <EntityType Name="Climate">
@@ -255,6 +300,19 @@
           <Property Name="While_living" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Hotel_Country" FromRole="Hotel" ToRole="Country" />
         </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID_order" />
+          </Key>
+          <Property Name="ID_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="ID_client" Type="Int32" Nullable="false" />
+          <Property Name="Order_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="ID_trip" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Order_Client" FromRole="Order" ToRole="Client" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK_Order_Trip" FromRole="Order" ToRole="Trip" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ID_role" />
@@ -287,6 +345,7 @@
           <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Trip_Client" FromRole="Trip" ToRole="Client" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Trip_Country" FromRole="Trip" ToRole="Country" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Trip" FromRole="Trip" ToRole="Order" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -299,6 +358,18 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
+        <Association Name="FK_Order_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID_client" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ID_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Trip_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
@@ -359,6 +430,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_Trip">
+          <End Role="Trip" Type="Self.Trip" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trip">
+              <PropertyRef Name="ID_trip" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ID_trip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Role">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -371,16 +454,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="educational_practiceEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="educational_practiceEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="Climate" EntityType="Self.Climate" />
           <EntitySet Name="Country" EntityType="Self.Country" />
           <EntitySet Name="CountryClimate" EntityType="Self.CountryClimate" />
           <EntitySet Name="Hotel" EntityType="Self.Hotel" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Trip" EntityType="Self.Trip" />
           <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
           <AssociationSet Name="FK_Trip_Client" Association="Self.FK_Trip_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Trip" EntitySet="Trip" />
@@ -401,6 +489,10 @@
             <End Role="Country" EntitySet="Country" />
             <End Role="Trip" EntitySet="Trip" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_Trip" Association="Self.FK_Order_Trip">
+            <End Role="Trip" EntitySet="Trip" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
@@ -411,7 +503,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище educational_practiceModelContainer" CdmEntityContainer="educational_practiceEntities2">
+        <EntityContainerMapping StorageEntityContainer="Хранилище educational_practiceModelContainer" CdmEntityContainer="educational_practiceEntities">
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="educational_practiceModel.Client">
               <MappingFragment StoreEntitySet="Client">
@@ -459,6 +551,18 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="While_living" ColumnName="While_living" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="educational_practiceModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="ID_order" ColumnName="ID_order" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ID_client" ColumnName="ID_client" />
+                <ScalarProperty Name="Order_date" ColumnName="Order_date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID_trip" ColumnName="ID_trip" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

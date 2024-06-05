@@ -14,6 +14,12 @@ namespace edPractice.Models
     
     public partial class Trip
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Trip()
+        {
+            this.Order = new HashSet<Order>();
+        }
+    
         public int ID_trip { get; set; }
         public int ID_client { get; set; }
         public int ID_country { get; set; }
@@ -25,7 +31,6 @@ namespace edPractice.Models
                 Console.WriteLine(Trip_start.ToShortDateString() + " - ");
                 return Trip_start.ToShortDateString() + " - ";
             }
-
         }
         public System.DateTime Trip_end { get; set; }
         public string date
@@ -35,9 +40,7 @@ namespace edPractice.Models
                 Console.WriteLine(Trip_end.ToShortDateString());
                 return Trip_end.ToShortDateString();
             }
-
         }
-
         public int Price { get; set; }
         public int Discount { get; set; }
         public string Image { get; set; }
@@ -51,10 +54,12 @@ namespace edPractice.Models
                 }
                 return $"../Images/{Image}";
             }
-
         }
+
 
         public virtual Client Client { get; set; }
         public virtual Country Country { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

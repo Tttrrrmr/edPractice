@@ -148,6 +148,20 @@ namespace edPractice
             AppConnect.model1db.SaveChanges();
             tripsList.ItemsSource = AppConnect.model1db.Trip.ToList();
         }
+
+        private void BtnOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Window4 window = new Window4();
+            window.Show();
+            this.Close();
+        }
+
+        private void BtnAddToCart_Click(object sender, RoutedEventArgs e)
+        {
+            Window4 window = new Window4();
+            window.Show();
+            this.Close();
+        }
     }
 
 }

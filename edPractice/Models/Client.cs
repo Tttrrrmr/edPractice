@@ -17,6 +17,7 @@ namespace edPractice.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
         {
+            this.Order = new HashSet<Order>();
             this.Trip = new HashSet<Trip>();
         }
     
@@ -29,12 +30,8 @@ namespace edPractice.Models
         public string Phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trip> Trip { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Surname} {Name} {Patronymic}";
-        }
-
     }
 }

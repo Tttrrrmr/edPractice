@@ -25,7 +25,7 @@ namespace edPractice
         public MainWindow()
         {
             InitializeComponent();
-            AppConnect.model1db = new educational_practiceEntities2();
+            AppConnect.model1db = new educational_practiceEntities();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

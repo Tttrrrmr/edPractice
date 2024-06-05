@@ -1,0 +1,69 @@
+﻿<Window x:Class="edPractice.Window4"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:edPractice"
+        mc:Ignorable="d"
+        Title="Заказы" Height="457" Width="977">
+    <Grid>
+        <ListView x:Name="listCart" Grid.Row="1" ScrollViewer.CanContentScroll="False" Width="960">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="320"/>
+                            <ColumnDefinition Width="170"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock>
+                                <Image Source="{Binding CorrectImage}" Width="100" Height="100"/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock>
+                                <Run Text="Название страны: " FontWeight="Bold"/>
+                                <Run Text="{Binding Country.Name}"/>
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Дата заказа: " FontWeight="Bold"/>
+                                <Run Text="{Binding Order_date}"/>
+                            </TextBlock>
+
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock>
+                                <Run Text="Цена: " FontWeight="Bold"/>
+                                <Run Text="{Binding Trip.Price}"/>
+                                <Run Text=" руб."/>
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Скидка: " FontWeight="Bold"/>
+                                <Run Text="{Binding Trip.Discount}"/>
+                                <Run Text=" руб."/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
+                            <TextBlock>
+                                <Run Text="Количество: " FontWeight="Bold"/>
+                                <Run Text="{Binding }"/>
+                            </TextBlock>
+                            <TextBlock>
+                                <Button x:Name="upNum" Content="/\" Width="30" Height="30" Click="upNum_Click"/>
+                                <Button x:Name="downNum" Content="\/" Width="30" Height="30" Click="downNum_Click"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+
+</Window>
