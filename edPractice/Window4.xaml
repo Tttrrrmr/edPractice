@@ -61,7 +61,7 @@
                 <StackPanel Orientation="Horizontal" Margin="0,308,0,10" Width="410">
                     <Button x:Name="BtnDeleteAll" Content="Очистить корзину" Width="120" Height="30" Margin="5,0,5,0"  HorizontalAlignment="Left" Click="BtnDeleteAll_Click"/>
                     <Button x:Name="BtnBack" Content="Список путевок"  Width="120" Height="30" HorizontalAlignment="Left" Margin="5,0,5,0" Click="BtnBack_Click_1"/>
-                    <Button x:Name="BtnCheckout" Content="Оформить заказ"  Width="115" Height="30" HorizontalAlignment="Right" Margin="4,0,0,0"/>
+                    <Button x:Name="BtnCheckout" Content="Оформить заказ"  Width="115" Height="30" HorizontalAlignment="Right" Margin="4,0,0,0" Click="BtnCheckout_Click"/>
                 </StackPanel>
 
             </Grid>

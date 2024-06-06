@@ -147,5 +147,12 @@ namespace edPractice
                 }
             }
         }
+
+        private void BtnCheckout_Click(object sender, RoutedEventArgs e)
+        {
+            Window6 window = new Window6(Role, ID);
+            window.Show();
+            this.Close();
+        }
     }
 }
