@@ -4,64 +4,74 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:edPractice"
-        Title="Оформление заказа" Height="573" Width="1014">
-
-    <Grid>
+        Title="Оформление заказа" Height="560" Width="1014">
+    <Grid Background="#FFFACD">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="450"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="600"/>
-                <ColumnDefinition Width="400"/>
-            </Grid.ColumnDefinitions>
-
-            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="5,0">
-                <ListView x:Name="listCart" Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="False" Margin="0">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding Trip.Country.Name}" Header="Название страны" Width="160"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Trip.Price}" Header="Цена" Width="110"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Trip.Discount}" Header="Скидка" Width="110"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Количество" Width="80"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Border>
-
-            <Border Grid.Row="1" Grid.Column="1" BorderThickness="1" BorderBrush="Gray" Background="White" MinHeight="440" MaxHeight="480" MinWidth="260" MaxWidth="260" CornerRadius="15">
-                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10">
-                    <StackPanel HorizontalAlignment="Center">
-                        <Label Content="Чек" FontSize="30px" FontWeight="Bold"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content = "Кол-во товаров:"/>
-                        <Label x:Name="GoodCount" Content="0" FontWeight="Bold"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content = "Цена:"/>
-                        <Label x:Name="SumPrice" Content = "0" FontWeight="Bold"/>
-                        <Label Content=" руб."/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content = "Цена с учетом скидки:"/>
-                        <Label x:Name="discountPrice" Content = "0" FontWeight="Bold"/>
-                        <Label Content=" руб."/>
-                    </StackPanel>
-                    <Border MinHeight="210" MaxHeight="220" MinWidth="200" MaxWidth="220" BorderThickness="1" BorderBrush="Black" Background="White">
-                        <Image x:Name="QRimg" Width="200" Height="200"/>
-                    </Border>
-                </StackPanel>
-            </Border>
-        </Grid>
-
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,5">
-            <Button x:Name="BtnBackToWindow" Content="Назад" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="BtnBackToWindow_Click" />
-            <Button x:Name="BtnPDF" Content="PDF документ" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="BtnPDF_Click" />
-            <Button x:Name="BtnQR" Content="QR" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="BtnQR_Click" />
+        <StackPanel Orientation="Horizontal" Background="#FF7F50" VerticalAlignment="Center">
+            <Image Source="/Images/icone.png" Width="83" Height="75" Margin="5,0"/>
+            <TextBlock Text="Оформление заказа" Foreground="#E0FFFF" FontSize="40px" Margin="5,0" Width="400" Height="60"/>
         </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="380"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="600"/>
+                    <ColumnDefinition Width="400"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="15,0">
+                    <ListView x:Name="listCart" Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="False" Margin="0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Trip.Country.Name}" Header="Название страны" Width="160"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Trip.Price}" Header="Цена" Width="110"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Trip.Discount}" Header="Скидка" Width="110"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Количество" Width="80"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" BorderThickness="1" BorderBrush="Gray" Background="White" MinHeight="340" MaxHeight="380" MinWidth="260" MaxWidth="260" CornerRadius="15">
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10">
+                        <StackPanel HorizontalAlignment="Center">
+                            <Label Content="Чек" FontSize="30px" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,0">
+                            <Label Content = "Кол-во товаров:"/>
+                            <Label x:Name="GoodCount" Content="0" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,0">
+                            <Label Content = "Цена:"/>
+                            <Label x:Name="SumPrice" Content = "0" FontWeight="Bold"/>
+                            <Label Content=" руб."/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,0">
+                            <Label Content = "Цена с учетом скидки:"/>
+                            <Label x:Name="discountPrice" Content = "0" FontWeight="Bold"/>
+                            <Label Content=" руб."/>
+                        </StackPanel>
+                        <Border MinHeight="200" MaxHeight="200" MinWidth="200" MaxWidth="200" BorderThickness="1" BorderBrush="Black" Background="White">
+                            <Image x:Name="QRimg" Width="200" Height="200"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0,5">
+                <Button x:Name="BtnBackToWindow" Content="Назад" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="BtnBackToWindow_Click" Background="#FF7F50" Foreground="#E0FFFF"/>
+                <Button x:Name="BtnPDF" Content="PDF документ" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="BtnPDF_Click" Background="#FF7F50" Foreground="#E0FFFF"/>
+                <Button x:Name="BtnQR" Content="QR" Width="120" Height="30" Margin="5,0,5,0" HorizontalAlignment="Left" Click="BtnQR_Click" Background="#FF7F50" Foreground="#E0FFFF"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

@@ -5,63 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:edPractice"
         mc:Ignorable="d"
-        Title="Путевки" Height="497" Width="839">
-    <Grid>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <ListView Name="tripsList" HorizontalContentAlignment="Stretch" Height="375">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="5" HorizontalAlignment="Stretch">
-                            <StackPanel MouseLeftButtonUp="Edit">
-                                <Grid Margin="0,0,0,10">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
+        Title="Путевки" Height="511" Width="839">
+    <Grid Background="#FFFACD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"></ColumnDefinition>
-                                        <ColumnDefinition Width="800"></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Background="#FF7F50">
+            <Image Source="/Images/icone.png" Width="89" Height="84" Margin="5,0"/>
+            <TextBlock Text="Путёвки" Foreground="#E0FFFF" FontSize="40px" Margin="5,0" Width="500" Height="61"/>
+        </StackPanel>
 
-                                    <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="10,0,0,0">
-                                        <Image Source="{Binding CorrectImage}" Width="100" Height="100" HorizontalAlignment="Left"/>
-                                    </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
 
-                                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="10,10,0,5">
-                                        <StackPanel HorizontalAlignment="Stretch">
-                                            <TextBlock Text="{Binding Country.Name}" FontWeight="Bold" FontSize="18"/>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Width="800">
+                <ListView Name="tripsList" HorizontalContentAlignment="Stretch" Width="780" Margin="5,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="5" HorizontalAlignment="Stretch">
+                                <StackPanel MouseLeftButtonUp="Edit">
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="200"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="10,0,0,0">
+                                            <Image Source="{Binding CorrectImage}" Width="100" Height="100" HorizontalAlignment="Left"/>
                                         </StackPanel>
-                                    </StackPanel>
 
-                                    <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
-                                        <StackPanel>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding dates}" />
-                                                <TextBlock Text="{Binding date}" Margin="0,0,5,0" />
+                                        <StackPanel Grid.Column="1" Grid.Row="0" Margin="10,10,0,5">
+                                            <StackPanel HorizontalAlignment="Stretch">
+                                                <TextBlock Text="{Binding Country.Name}" FontWeight="Bold" FontSize="18"/>
                                             </StackPanel>
-
-                                            <TextBlock Text="{Binding Price, StringFormat=C}" Margin="0,5,0,0"/>
-                                            <TextBlock Text="{Binding Discount, StringFormat=C}" Margin="0,7,0,0"/>
-                                            <Button x:Name="BtnAddToCart" Content="Добавить в корзину" Tag="{Binding ID_trip}" HorizontalAlignment="Right" Width="200" Height="30" Click="BtnAddToCart_Click"></Button>
                                         </StackPanel>
-                                    </StackPanel>
-                                    
-                                </Grid>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ScrollViewer>
-        <ComboBox x:Name="ComboFilter" HorizontalAlignment="Left" Margin="29,6,0,0" VerticalAlignment="Top" Width="158" SelectionChanged="ComboBox_SelectionChanged"/>
-        <ComboBox x:Name="ComboSort" HorizontalAlignment="Left" Margin="217,6,0,0" VerticalAlignment="Top" Width="149" SelectionChanged="ComboSort_SelectionChanged"/>
-        <TextBox x:Name="TextSearch" HorizontalAlignment="Left" Margin="386,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277" TextChanged="TextSearch_TextChanged"/>
-        <Label x:Name="LabelCount" Content="" HorizontalAlignment="Left" Margin="683,6,0,0" VerticalAlignment="Top" Width="126" Height="28"/>
-        <Button x:Name="BtnAdd" Content="Добавить" HorizontalAlignment="Left" Margin="39,445,0,0" VerticalAlignment="Top" Width="148" Height="26" FontSize="16" Click="BtnAdd_Click" />
-        <Button x:Name="BtnDelete" Content="Удалить" HorizontalAlignment="Left" Margin="430,445,0,0" VerticalAlignment="Top" Width="148" Height="26" FontSize="16" Click="BtnDelete_Click" />
-        <Button x:Name="BtnEdit" Content="Редактировать" HorizontalAlignment="Left" Margin="238,445,0,0" VerticalAlignment="Top" Width="148" Height="26" FontSize="16" Click="BtnEdit_Click" />
-        <Button x:Name="BtnOrder" Content="Корзина" HorizontalAlignment="Left" Margin="622,445,0,0" VerticalAlignment="Top" Width="148" Height="26" FontSize="16" Click="BtnOrder_Click"/>
+
+                                        <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding dates}" />
+                                                    <TextBlock Text="{Binding date}" Margin="0,0,5,0" />
+                                                </StackPanel>
+
+                                                <TextBlock Text="{Binding Price, StringFormat=C}" Margin="0,5,0,0"/>
+                                                <TextBlock Text="{Binding Discount, StringFormat=C}" Margin="0,7,0,0"/>
+                                                <Button x:Name="BtnAddToCart" Content="Добавить в корзину" Tag="{Binding ID_trip}" HorizontalAlignment="Right" Width="200" Height="30" Click="BtnAddToCart_Click"></Button>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" Height="60" VerticalAlignment="Center">
+                <ComboBox x:Name="ComboFilter" HorizontalAlignment="Left" Margin="5,5,0,5" Width="158" Height="28" SelectionChanged="ComboBox_SelectionChanged"/>
+                <ComboBox x:Name="ComboSort" HorizontalAlignment="Left" Margin="15,5,0,5" Width="149" Height="28" SelectionChanged="ComboSort_SelectionChanged"/>
+                <TextBox x:Name="TextSearch" HorizontalAlignment="Left" Margin="15,5,0,5" TextWrapping="Wrap" Width="277" Height="28" TextChanged="TextSearch_TextChanged"/>
+                <Label x:Name="LabelCount" Content="" HorizontalAlignment="Left" Margin="15,5,5,5" Width="126" Height="28"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Height="60" VerticalAlignment="Center">
+                <Button x:Name="BtnAdd" Content="Добавить" HorizontalAlignment="Left" Margin="10,5,5,5" Width="148" Height="28" FontSize="16" Click="BtnAdd_Click" Background="#FF7F50" BorderBrush="#E0FFFF" Foreground="#E0FFFF"/>
+                <Button x:Name="BtnDelete" Content="Удалить" HorizontalAlignment="Left" Margin="10,5,5,5" Width="148" Height="28" FontSize="16" Click="BtnDelete_Click" Background="#FF7F50" BorderBrush="#E0FFFF" Foreground="#E0FFFF"/>
+                <Button x:Name="BtnEdit" Content="Редактировать" HorizontalAlignment="Left" Margin="10,5,5,5" Width="148" Height="28" FontSize="16" Click="BtnEdit_Click" Background="#FF7F50" BorderBrush="#E0FFFF" Foreground="#E0FFFF"/>
+                <Button x:Name="BtnOrder" Content="Корзина" HorizontalAlignment="Left" Margin="10,5,5,5" Width="148" Height="28" FontSize="16" Click="BtnOrder_Click" Background="#FF7F50" BorderBrush="#E0FFFF" Foreground="#E0FFFF"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

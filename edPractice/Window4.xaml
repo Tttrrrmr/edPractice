@@ -5,66 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:edPractice"
         mc:Ignorable="d"
-        Title="Order Form" Height="450" Width="800">
-    <Grid>
-        <StackPanel>
-            <TextBlock Text="Корзина путевок" Margin="10" FontSize="16"/>
-            <Grid Height="385">
-                <ListView x:Name="listCart" ScrollViewer.CanContentScroll="False" Margin="22,0,22,132">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="300"/>
-                                    <ColumnDefinition Width="320"/>
-                                    <ColumnDefinition Width="170"/>
-                                </Grid.ColumnDefinitions>
+        Title="Order Form" Height="417" Width="800">
+    <Grid Background="#FFFACD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-                                <StackPanel Grid.Column="0" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
-                                    <TextBlock><InlineUIContainer>
+        <StackPanel Orientation="Horizontal" Background="#FF7F50">
+            <Image Source="/Images/icone.png" Width="85" Height="75" Margin="5,0"/>
+            <TextBlock Text="Корзина" Foreground="#E0FFFF" FontSize="40px" Margin="5,0" Width="400" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <Grid Height="230">
+                    <ListView x:Name="listCart" ScrollViewer.CanContentScroll="False" Margin="20,0,20,5">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="300"/>
+                                        <ColumnDefinition Width="320"/>
+                                        <ColumnDefinition Width="170"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
+                                        <TextBlock><InlineUIContainer>
                                             <Image Source="{Binding Trip.CorrectImage}" Width="100" Height="100"/>
                                         </InlineUIContainer></TextBlock>
-                                </StackPanel>
+                                    </StackPanel>
 
-                                <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
-                                    <TextBlock><Run Text="Название страны: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Trip.Country.Name}"/></TextBlock>
-                                    <TextBlock><Run Text="Дата заказа: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Order_date}"/></TextBlock>
-                                </StackPanel>
+                                    <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                                        <TextBlock><Run Text="Название страны: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Trip.Country.Name}"/></TextBlock>
+                                        <TextBlock><Run Text="Дата заказа: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Order_date}"/></TextBlock>
+                                    </StackPanel>
 
-                                <StackPanel Grid.Column="2" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
-                                    <TextBlock><Run Text="Цена: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Trip.Price}"/><Run Text=" "/><Run Text=" руб."/></TextBlock>
-                                    <TextBlock><Run Text="Скидка: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Trip.Discount}"/><Run Text=" "/><Run Text=" руб."/></TextBlock>
-                                </StackPanel>
+                                    <StackPanel Grid.Column="2" Width="auto" Orientation="Vertical" HorizontalAlignment="Left">
+                                        <TextBlock><Run Text="Цена: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Trip.Price}"/><Run Text=" "/><Run Text=" руб."/></TextBlock>
+                                        <TextBlock><Run Text="Скидка: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Trip.Discount}"/><Run Text=" "/><Run Text=" руб."/></TextBlock>
+                                    </StackPanel>
 
-                                <StackPanel Grid.Column="3" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
-                                    <TextBlock><Run Text="Количество: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Count}"/></TextBlock>
-                                    <TextBlock><InlineUIContainer>
+                                    <StackPanel Grid.Column="3" Width="auto" Orientation="Vertical" HorizontalAlignment="Center">
+                                        <TextBlock><Run Text="Количество: " FontWeight="Bold"/><Run Text=" "/><Run Text="{Binding Count}"/></TextBlock>
+                                        <TextBlock><InlineUIContainer>
                                         <Button x:Name="upNum" Content="/\" Width="30" Height="30" Click="upNum_Click"/>
                                         </InlineUIContainer><Run Text=" "/><InlineUIContainer>
                                         <Button x:Name="downNum" Content="\/" Width="30" Height="30" Click="downNum_Click"/>
                                         </InlineUIContainer>
-                                    </TextBlock>
-                                    <TextBlock>
+                                        </TextBlock>
+                                        <TextBlock>
                                         <Button x:Name="delTrip" Content="X" Width="30" Height="30" Click="delTrip_Click" />
-                                    </TextBlock>
-                                    
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <StackPanel Orientation="Vertical" Margin="20,210,20,20" Width="150" Height="50" HorizontalAlignment="Right">
-                    <Label x:Name="LabelSum" Content="1" Width="150"/>
-                    <Label x:Name="LabelDiscount" Content="2" Width="150"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,308,0,10" Width="410">
-                    <Button x:Name="BtnDeleteAll" Content="Очистить корзину" Width="120" Height="30" Margin="5,0,5,0"  HorizontalAlignment="Left" Click="BtnDeleteAll_Click"/>
-                    <Button x:Name="BtnBack" Content="Список путевок"  Width="120" Height="30" HorizontalAlignment="Left" Margin="5,0,5,0" Click="BtnBack_Click_1"/>
-                    <Button x:Name="BtnCheckout" Content="Оформить заказ"  Width="115" Height="30" HorizontalAlignment="Right" Margin="4,0,0,0" Click="BtnCheckout_Click"/>
-                </StackPanel>
+                                        </TextBlock>
 
-            </Grid>
-        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Width="735">
+                    <Button x:Name="BtnDeleteAll" Content="Очистить корзину" Width="120" Height="30" Margin="5,0,5,0"  Click="BtnDeleteAll_Click" Background="#FF7F50" Foreground="#E0FFFF"/>
+                    <Button x:Name="BtnBack" Content="Список путевок"  Width="120" Height="30" Margin="5,0,5,0" Click="BtnBack_Click_1" Background="#FF7F50" Foreground="#E0FFFF"/>
+                    <Button x:Name="BtnCheckout" Content="Оформить заказ"  Width="115" Height="30" Margin="5,0,5,0" Click="BtnCheckout_Click" Background="#FF7F50" Foreground="#E0FFFF"/>
+                    <Label x:Name="LabelSum" Content="1" Width="150" VerticalContentAlignment="Center"/>
+                    <Label x:Name="LabelDiscount" Content="2" Width="150" VerticalContentAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

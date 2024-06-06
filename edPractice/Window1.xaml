@@ -5,18 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:edPractice"
         mc:Ignorable="d"
-                Title="Регистрация" Height="550" Width="700">
-    <Grid HorizontalAlignment="Center" Width="678">
-        <Label Content="Введите имя:" HorizontalAlignment="Left" Height="38" Margin="106,22,0,0" VerticalAlignment="Top" Width="171" FontSize="20"/>
-        <Label Content="Введите логин:" HorizontalAlignment="Left" Height="43" Margin="106,121,0,0" VerticalAlignment="Top" Width="170" FontSize="20"/>
-        <TextBox x:Name="txbName" HorizontalAlignment="Left" Height="46" Margin="107,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406" FontSize="20"/>
-        <Label Content="Введите пароль:" HorizontalAlignment="Left" Height="43" Margin="108,205,0,0" VerticalAlignment="Top" Width="170" FontSize="20"/>
-        <Label Content="Повторите пароль:" HorizontalAlignment="Left" Height="43" Margin="107,299,0,0" VerticalAlignment="Top" Width="202" FontSize="20"/>
-        <Button Content="Назад" HorizontalAlignment="Left" Height="58" Margin="106,428,0,0" VerticalAlignment="Top" Width="136" FontSize="20" Click="Button_Click"/>
-        <Button x:Name="btnCreate" Content="Зарегистрироваться" HorizontalAlignment="Left" Height="58" Margin="364,428,0,0" VerticalAlignment="Top" Width="203" FontSize="20" Click="btnCreate_Click"/>
-        <PasswordBox x:Name="psbPass" HorizontalAlignment="Left" Height="46" Margin="108,253,0,0" VerticalAlignment="Top" Width="405" FontSize="20"/>
-        <PasswordBox x:Name="psbPass1" HorizontalAlignment="Left" Height="46" Margin="108,342,0,0" VerticalAlignment="Top" Width="405" PasswordChanged="PasswordBox1_PassworChanged" FontSize="20"/>
-        <TextBox x:Name="txbLogin" HorizontalAlignment="Left" Height="46" Margin="108,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406" FontSize="20"/>
+        Title="Регистрация" Height="495" Width="700">
 
+    <Grid Background="#FFFACD">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Background="#FF7F50">
+            <Image Source="/Images/icone.png" Width="93" Height="84" Margin="5,0"/>
+            <TextBlock Text="Регистрация" Foreground="#E0FFFF" FontSize="40px" Margin="5,0" Width="400" Height="60"/>
+        </StackPanel>
+
+        <Grid HorizontalAlignment="Center" Width="678" Grid.Row="1">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Label Content="Введите имя:" HorizontalAlignment="Left" Height="38" Margin="5,5,0,0" Width="200" FontSize="20"/>
+                    <TextBox x:Name="txbName" HorizontalAlignment="Left" Height="46" Margin="5,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406" FontSize="20"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Label Content="Введите логин:" HorizontalAlignment="Left" Height="43" Margin="5,5,0,0" Width="200" FontSize="20"/>
+                    <TextBox x:Name="txbLogin" HorizontalAlignment="Left" Height="46" Margin="5,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406" FontSize="20"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Label Content="Введите пароль:" HorizontalAlignment="Left" Height="43" Margin="5,5,0,0" VerticalAlignment="Top" Width="200" FontSize="20"/>
+                    <PasswordBox x:Name="psbPass" HorizontalAlignment="Left" Height="46" Margin="5,5,0,0" VerticalAlignment="Top" Width="405" FontSize="20"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Label Content="Повторите пароль:" HorizontalAlignment="Left" Height="43" Margin="5,5,0,0" VerticalAlignment="Top" Width="200" FontSize="20"/>
+                    <PasswordBox x:Name="psbPass1" HorizontalAlignment="Left" Height="46" Margin="5,5,0,0" VerticalAlignment="Top" Width="405" PasswordChanged="PasswordBox1_PassworChanged" FontSize="20"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15">
+                    <Button Content="Назад" Height="58" Margin="0,5,0,0" VerticalAlignment="Top" Width="136" FontSize="20" Click="Button_Click" Background="#FF7F50" Foreground="#E0FFFF"/>
+                    <Button x:Name="btnCreate" Content="Зарегистрироваться" Height="58" Margin="5,5,0,0" VerticalAlignment="Top" Width="203" FontSize="20" Click="btnCreate_Click" Background="#FF7F50" Foreground="#E0FFFF"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
