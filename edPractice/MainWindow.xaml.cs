@@ -62,7 +62,7 @@ namespace edPractice
                 MessageBox.Show("Ошибка " + Ex.Message.ToString() + "Критическая работа приложения!",
                     "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            Window2 window = new Window2(user.ID_role);
+            Window2 window = new Window2(user.ID_role, user.ID_user);
             window.Show();
             this.Close();
 

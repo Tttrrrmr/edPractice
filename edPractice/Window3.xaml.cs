@@ -85,7 +85,7 @@ namespace edPractice
             {
                 currentTrip.ID_country = countryLis[ComboCountry.SelectedIndex - 1].ID_country;
             } 
-            catch (Exception ex)
+            catch (Exception)
             {
                 currentTrip.ID_country = 0;
             }
@@ -97,7 +97,7 @@ namespace edPractice
             {
                 currentTrip.ID_client = clientLis[ComboClient.SelectedIndex - 1].ID_client;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 currentTrip.ID_client = 0;  
             }
@@ -124,7 +124,7 @@ namespace edPractice
             {
                 currentTrip.Image = (String)ComboImage.SelectedItem;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 currentTrip.Image = " ";
             }

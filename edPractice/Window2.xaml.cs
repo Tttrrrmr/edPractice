@@ -22,9 +22,11 @@ namespace edPractice
     /// </summary>
     public partial class Window2 : Window
     {
-        public Window2(int role)
+        public Window2(int role, int user)
         {
             InitializeComponent();
+            UserID = user;
+            Role = role;
             tripsList.ItemsSource = AppConnect.model1db.Trip.ToList();
             ComboFilter.Items.Add("от 0 до 550");
             ComboFilter.Items.Add("от 1000 до 1500");
@@ -50,6 +52,10 @@ namespace edPractice
             
 
         }
+
+        int UserID { get; set; }
+        int Role { get; set; }
+
         private void Edit(object sender, MouseButtonEventArgs e)
         {
             var selectedItem = (Trip)((FrameworkElement)sender).DataContext;
@@ -62,9 +68,9 @@ namespace edPractice
             var country = AppConnect.model1db.Country.ToList();
 
             //поиск по названию страны
-            if (TextSearch != null)
+            if (TextSearch.Text != null)
             {
-                country = country.Where(x => x.Name.ToLower().Contains(TextSearch.Text.ToLower())).ToList();
+                trip = trip.Where(x => x.Country.Name.ToLower().Contains(TextSearch.Text.ToLower())).ToList();
             }
 
             //фильтрация по скидки
@@ -151,16 +157,35 @@ namespace edPractice
 
         private void BtnOrder_Click(object sender, RoutedEventArgs e)
         {
-            Window4 window = new Window4();
+            Window4 window = new Window4(Role, UserID);
             window.Show();
             this.Close();
         }
 
         private void BtnAddToCart_Click(object sender, RoutedEventArgs e)
         {
-            Window4 window = new Window4();
-            window.Show();
-            this.Close();
+            var selectedTrip = tripsList.SelectedItem as Trip;
+
+            Console.WriteLine(selectedTrip.ToString());
+
+            if (selectedTrip != null)
+            {
+                Order order = new Order
+                {
+                    Count=1,
+                    ID_client=UserID,
+                    Order_date=DateTime.Now,
+                    Status=false,
+                    ID_trip=selectedTrip.ID_trip
+                };
+                AppConnect.model1db.Order.Add(order);
+                AppConnect.model1db.SaveChanges() ;
+                MessageBox.Show("Путевка добавлена в корзину!");
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите путевку для добавления в корзину");
+            }
         }
     }
 

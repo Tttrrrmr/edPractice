@@ -44,7 +44,7 @@
 
                                             <TextBlock Text="{Binding Price, StringFormat=C}" Margin="0,5,0,0"/>
                                             <TextBlock Text="{Binding Discount, StringFormat=C}" Margin="0,7,0,0"/>
-                                            <Button x:Name="BtnAddToCart" Content="Добавить в корзину" Tag="{Binding ID_trip}" HorizontalAlignment="Right" Width="200" Height="30"></Button>
+                                            <Button x:Name="BtnAddToCart" Content="Добавить в корзину" Tag="{Binding ID_trip}" HorizontalAlignment="Right" Width="200" Height="30" Click="BtnAddToCart_Click"></Button>
                                         </StackPanel>
                                     </StackPanel>
                                     
